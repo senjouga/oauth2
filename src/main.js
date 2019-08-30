@@ -6,14 +6,7 @@ import oauth2 from './oauth2'
 
 Vue.config.productionTip = false
 
-let wxOption = {
-  appid: '', // appid
-  agentid: '', // agentid
-  responseType: 'code', // 返回类型，请填写code
-  scope: 'snsapi_base'
-}
-
-Vue.use(oauth2, wxOption, ({code, wait, timeOutRefresh, message}) => {
+Vue.use(oauth2, ({code, wait, timeOutRefresh, message}) => {
   if (!wait) {
     if (code) {
       console.log('code')

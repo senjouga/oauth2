@@ -4,6 +4,7 @@
  * @date 2018/8/26
  * ------------------------------------------------------------------
  */
+
 class oauth {
   constructor (config) {
     let defaultConfig = {

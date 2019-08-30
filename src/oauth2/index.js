@@ -8,7 +8,13 @@ function getQueryString (name) {
 }
 
 export default {
-    install (Vue, wxauthConfig, codeCallBack) {
+    install (Vue, codeCallBack) {
+        let wxauthConfig = {
+          appid: '',
+          agentid: '',
+          responseType: 'code', // 返回类型，请填写code
+          scope: 'snsapi_base'
+        }
         console.log('构造器')
         window.showAuthLoading = function () {
             var para = document.createElement('div');
@@ -28,8 +34,10 @@ export default {
         let codeSession = oauth2.getAuthCode() // session code
         let autoLoginFail = window.localStorage.getItem('loginFail') || false
         let logoutAction = window.localStorage.getItem('logoutAction') || null
-        if (logoutAction) {
+        let keepAutoClose = window.sessionStorage.getItem('keepAutoClose') || false
+        if (logoutAction || keepAutoClose) {
             window.localStorage.removeItem('logoutAction')
+            window.sessionStorage.setItem('keepAutoClose', 'true')
             codeCallBack({code: '', wait: false, timeOutRefresh: false, message: 'logoutAction'})
             return false
         }
