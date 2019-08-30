@@ -28,6 +28,7 @@ export default {
             document.getElementById('auth_loading').remove()
         }
         window.showAuthLoading()
+
         let oauth2 = new oauth(wxauthConfig)
         console.log(oauth2)
         let codeUrl = getQueryString('code') // url code
